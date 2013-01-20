@@ -81,6 +81,10 @@ function initializeDOMElements() {
     shadowCanvas.style.display = SHOW_SHADOW ? 'block' : 'none';
     document.getElementById('capture').appendChild(shadowCanvas);
     shadowContext = shadowCanvas.getContext('2d');    
+    CANVAS_TOP = $(shadowCanvas).offset().top;
+    CANVAS_BOTTOM = CANVAS_TOP + 480;
+    CANVAS_LEFT = $(shadowCanvas).offset().left;
+    CANVAS_RIGHT = CANVAS_LEFT + 640;
 }
 
 
