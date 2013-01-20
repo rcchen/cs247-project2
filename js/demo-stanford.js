@@ -6,6 +6,8 @@ var imageReady = false;
 $(document).ready(function() {
     stanfordImage = new Image();
     stanfordImage.src = IMG_SRC;
+    stanfordImage.height = window.innerHeight;
+    stanfordImage.width = window.innerWidth;
     stanfordImage.onload = function() {
         imageReady = true;
     }
