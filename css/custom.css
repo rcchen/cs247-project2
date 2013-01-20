@@ -1,0 +1,10 @@
+.ball {
+	border-radius:50%;
+	width:15px;
+	height:15px;
+	background-color:red;
+	z-index:100;
+	position:absolute;
+	top: 0px;
+	left:100px;
+}

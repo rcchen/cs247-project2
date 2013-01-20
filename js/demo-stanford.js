@@ -1,5 +1,6 @@
 var IMG_SRC  = 'media/rosebowl.jpg';
 var OVERLAY  = 255;   // 0 = foreground, 255 = background
+var stepCounter = 0;
 
 var stanfordImage;
 var imageReady = false;
@@ -55,7 +56,13 @@ function renderShadow() {
         // And now, paint our pixels array back to the canvas.
         shadowContext.putImageData(pixels, 0, 0);
     }
-
+		moveBalls(shadow);
+		if (stepCounter==10) {
+			console.log("step counter");
+			createBall();
+			stepCounter=0;
+		}
+		stepCounter++;
     // Loop every millisecond. Changing the freq. is a tradeoff between
     // interactivity and performance. Tune to what your machine can support.
     setTimeout(renderShadow, 0);
