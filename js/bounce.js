@@ -8,12 +8,18 @@ var CANVAS_TOP;
 var CANVAS_BOTTOM;
 var CANVAS_RIGHT;
 var CANVAS_LEFT;
+var OVERLAY = 255;
 
 //Moves all balls on the screen
 function moveBalls() {
 	$(".ball").each(function() {
 		var l = $(this).offset().left + $(this).data("vx");
 		var t = $(this).offset().top + $(this).data("vy");
+		if(isShadow($(this).offset().left,$(this).offset().top)){
+			console.log('shadow collision');
+		}else {
+			console.log('false');
+		}
 		if (l < CANVAS_LEFT || l > CANVAS_RIGHT 
 			|| t < CANVAS_TOP || t > CANVAS_BOTTOM) {
 			$(this).remove();
@@ -43,7 +49,8 @@ function createBall() {
 
 
 function bounceBall(ball) {
-	console.log("bounce");
+	var velocity = ball.data("vy");
+	ball.data("vy", velocity*-1);
 }
 
 
@@ -74,13 +81,16 @@ function isHit(ball) {
 	return false;
 }
 
-function isShadow(x, y) {
-	return false;
-}
-
-
 //Plays a sound based on the ball's attributes
 function playSound(ball) {
 	//TODO
+}
+
+function isShadow(x, y) {
+	var index = 4 * (x + y * CANVAS_RIGHT);
+	if (shadow.data[index] == OVERLAY && shadow.data[index+1] == OVERLAY && shadow.data[index+2] == OVERLAY) {
+		return false;
+	}
+	return true;	
 }
 
