@@ -38,6 +38,10 @@ function createBall() {
 	var newBall = $("<div></div>");
 	newBall.attr("class", "ball");
 	newBall.data("vy", vy);
+	vx = Math.floor(Math.random()*(10))+1; //random number from 0 to 2
+	if (Math.random() > 0.5) {
+		vx *=-1;
+	}
 	newBall.data("vx", vx);
 	newBall.css("height", BALL_HEIGHT+"px");
 	newBall.css("width", BALL_WIDTH+"px");
@@ -50,7 +54,6 @@ function createBall() {
 
 function bounceBall(ball) {
 	var velocity = ball.data("vy");
-	ball.data("vy", velocity*-1);
 }
 
 
@@ -65,20 +68,33 @@ function getCanvasY(ball) {
 
 
 //Returns true if the ball hit a shadow, false otherwise.
-//Updates the ball's data "angle" attribute.
 function isHit(ball) {
 	var x = getCanvasX(ball);
 	var y = getCanvasY(ball);
+	var vx = ball.data("vx");
+	var vy = ball.data("vy");
+	var isHit = false;
 	//TODO: make shadow detection more accurate?
-	if (isShadow(x, y) 
-			|| isShadow(x + BALL_WIDTH, y)
-			|| isShadow(x + BALL_WIDTH, y + BALL_HEIGHT)
-			|| isShadow(x, y + BALL_HEIGHT)
-			) {
-		//TODO: ANGLE DATA
-		return true;
+	var nw = isShadow(x, y);
+	var ne = isShadow(x + BALL_WIDTH, y);
+	var se = isShadow(x + BALL_WIDTH, y + BALL_HEIGHT);
+	var sw = isShadow(x, y + BALL_HEIGHT);
+	if ((ne && nw) || (se && sw)) {
+		isHit = true;
+		vy*=-1;
 	}
-	return false;
+	if ((ne && se) || (nw && sw)) {
+		isHit = true;
+		vx*=-1;
+	}
+	else if (ne || nw || se || sw) {
+		isHit=true;
+		vx*=-1;
+		vy*=-1;
+	}
+	ball.data("vx", vx);
+	ball.data("vy", vy);
+	return isHit;
 }
 
 //Plays a sound based on the ball's attributes
