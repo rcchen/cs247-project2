@@ -54,7 +54,7 @@ function renderShadow() {
         // And now, paint our pixels array back to the canvas.
         shadowContext.putImageData(pixels, 0, 0);
     }
-		moveBalls();
+		moveBalls(shadow);
 		if (stepCounter==10) {
 			console.log("step counter");
 			createBall();
