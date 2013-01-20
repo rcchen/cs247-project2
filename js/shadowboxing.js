@@ -228,8 +228,7 @@ function getShadowData() {
         var gBackground = background.data[i+1];
         var bBackground = background.data[i+2];
         		
-        var distance = pixelDistance(rCurrent, gCurrent, bCurrent, rBackground, gBackground, bBackground);        
-        
+        var distance = pixelDistance(rCurrent, gCurrent, bCurrent, rBackground, gBackground, bBackground);         
         if (distance >= SHADOW_THRESHOLD) {
             // foreground, show shadow
             pixelData.data[i] = 0;
@@ -237,7 +236,7 @@ function getShadowData() {
             pixelData.data[i+2] = 0;
         } else {
             // background
-            
+						 
             //  update model of background, since we think this is in the background
             updateBackground(i, rCurrent, gCurrent, bCurrent, rBackground, gBackground, bBackground);
             
