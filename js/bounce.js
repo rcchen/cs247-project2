@@ -21,7 +21,7 @@ function moveBalls() {
 		else {
 			$(this).offset({top:t, left:l });				
 			if (isHit($(this))) {
-				console.log("bounce");
+				bounceBall($(this));
 			}
 		}
 	});
@@ -41,27 +41,40 @@ function createBall() {
 	$('body').append(newBall);
 }
 
+
+function bounceBall(ball) {
+	console.log("bounce");
+}
+
+
 function getCanvasX(ball) {
 	return ball.offset().left - CANVAS_LEFT;
 }
 
+
 function getCanvasY(ball) {
 	return ball.offset().top - CANVAS_TOP;
 }
+
 
 //Returns true if the ball hit a shadow, false otherwise.
 //Updates the ball's data "angle" attribute.
 function isHit(ball) {
 	var x = getCanvasX(ball);
 	var y = getCanvasY(ball);
-	if (isShadow(shadow, x, y)) {
-		//TODO: update shadow data
+	//TODO: make shadow detection more accurate?
+	if (isShadow(x, y) 
+			|| isShadow(x + BALL_WIDTH, y)
+			|| isShadow(x + BALL_WIDTH, y + BALL_HEIGHT)
+			|| isShadow(x, y + BALL_HEIGHT)
+			) {
+		//TODO: ANGLE DATA
 		return true;
 	}
 	return false;
 }
 
-function isShadow(shadow, x, y) {
+function isShadow(x, y) {
 	return false;
 }
 
