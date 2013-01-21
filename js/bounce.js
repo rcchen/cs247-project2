@@ -12,11 +12,20 @@ var CANVAS_BOTTOM;
 var CANVAS_RIGHT;
 var CANVAS_LEFT;
 var OVERLAY = 255;
+var GRAVITY = 2;
+var DRAG = 0.5;
 
 //Moves all balls on the screen
 function moveBalls() {
 	$(".ball").each(function() {
 		var l = $(this).offset().left + $(this).data("vx");
+		var vel = getVelocity($(this));
+		if(vel>0) {
+			incrementVelocity($(this),-DRAG);
+		}else {
+			incrementVelocity($(this), DRAG);
+		}
+		incrementVelocity($(this),GRAVITY);
 		var t = $(this).offset().top + $(this).data("vy");
 		if (l < CANVAS_LEFT || l > CANVAS_RIGHT 
 			|| t < CANVAS_TOP || t > CANVAS_BOTTOM) {
@@ -68,6 +77,10 @@ function incrementVelocity(ball, increment) {
 	var vy = $(ball).data("vy");
 	vy += increment;
 	$(ball).data("vy", vy);
+}
+
+function getVelocity(ball) {
+	return $(ball).data("vy");
 }
 
 function setVelocity(ball, nw, ne, se, sw) {
