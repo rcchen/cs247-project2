@@ -63,16 +63,33 @@ function createBall() {
 
 function bounceBall(ball) {
 	var velocity = ball.data("vy");
+	//Change sound
 	var sound;
-
-	if (ball.getCanvasX < 50) {
-		sound=document.getElementById('note1');
-	} else {
-		sound=document.getElementById('note2');
-	}
+	var offset = ball.offset().left;
+	var index = Math.floor(offset / (CANVAS_WIDTH/6)) + 1; 
+	var filename = 'note' + index;
+	sound=document.getElementById(filename);
 	sound.play();
+	//Change color
+	var color;
+	switch(index) {
+		case 1: color = "red";
+						break;
+		case 2: color = "orange";
+						break;
+		case 3: color = "yellow";
+						break;
+		case 4: color = "green";
+						break;
+		case 5: color = "cyan";
+						break;
+		case 6: color = "blue";
+						break;
+		case 7: color = "purple";
+						break;
+	}
+	$(ball).css('background-color', color);
 }
-
 
 function getCanvasX(ball) {
 	return ball.offset().left - CANVAS_LEFT;
@@ -149,11 +166,6 @@ function isHit(ball) {
 	var sw = isShadow(x, y + BALL_HEIGHT);
 	setVelocity(ball, nw, ne, se, sw);
 	return (nw || ne || se || sw) && !(nw && ne && se && sw);
-}
-
-//Plays a sound based on the ball's attributes
-function playSound(ball) {
-	//TODO
 }
 
 function isShadow(x, y) {
