@@ -63,8 +63,14 @@ function createBall() {
 
 function bounceBall(ball) {
 	var velocity = ball.data("vy");
-	var thissound=document.getElementById('audio1');
-	thissound.play();
+	var sound;
+
+	if (ball.getCanvasX < 50) {
+		sound=document.getElementById('note1');
+	} else {
+		sound=document.getElementById('note2');
+	}
+	sound.play();
 }
 
 
