@@ -1,24 +1,30 @@
 var vy = 10; //Velocity in the y direction
 var vx = 0; //Velocity in the x direction
+var dx = 3; //Amount that velocity changes when hitting ball in same direction
 var BALL_HEIGHT=15;
 var BALL_WIDTH=15;
 
 //These are actually set in shadowboxing.js when the canvas is initialized
+var CANVAS_HEIGHT;
+var CANVAS_WIDTH;
 var CANVAS_TOP;
 var CANVAS_BOTTOM;
 var CANVAS_RIGHT;
 var CANVAS_LEFT;
 var OVERLAY = 255;
+var GRAVITY = 2;
+var DRAG = 0.5;
 
 //Moves all balls on the screen
 function moveBalls() {
 	$(".ball").each(function() {
 		var l = $(this).offset().left + $(this).data("vx");
 		var t = $(this).offset().top + $(this).data("vy");
-		if(isShadow($(this).offset().left,$(this).offset().top)){
-			console.log('shadow collision');
+		var vel = getVelocity($(this));
+		if(vel>0) {
+			incrementVelocity($(this),-DRAG);
 		}else {
-			console.log('false');
+			incrementVelocity($(this), DRAG);
 		}
 		if (l < CANVAS_LEFT || l > CANVAS_RIGHT 
 			|| t < CANVAS_TOP || t > CANVAS_BOTTOM) {
@@ -29,6 +35,9 @@ function moveBalls() {
 			if (isHit($(this))) {
 				bounceBall($(this));
 			}
+			else {
+				incrementVelocity($(this),GRAVITY);
+			}
 		}
 	});
 }
@@ -38,6 +47,10 @@ function createBall() {
 	var newBall = $("<div></div>");
 	newBall.attr("class", "ball");
 	newBall.data("vy", vy);
+	vx = Math.floor(Math.random()*(10))+1; //random number from 0 to 2
+	if (Math.random() > 0.5) {
+		vx *=-1;
+	}
 	newBall.data("vx", vx);
 	newBall.css("height", BALL_HEIGHT+"px");
 	newBall.css("width", BALL_WIDTH+"px");
@@ -50,9 +63,33 @@ function createBall() {
 
 function bounceBall(ball) {
 	var velocity = ball.data("vy");
-	ball.data("vy", velocity*-1);
+	//Change sound
+	var sound;
+	var offset = ball.offset().left;
+	var index = Math.floor(offset / (CANVAS_WIDTH/6)) + 1; 
+	var filename = 'note' + index;
+	sound=document.getElementById(filename);
+	sound.play();
+	//Change color
+	var color;
+	switch(index) {
+		case 1: color = "red";
+						break;
+		case 2: color = "orange";
+						break;
+		case 3: color = "yellow";
+						break;
+		case 4: color = "green";
+						break;
+		case 5: color = "cyan";
+						break;
+		case 6: color = "blue";
+						break;
+		case 7: color = "purple";
+						break;
+	}
+	$(ball).css('background-color', color);
 }
-
 
 function getCanvasX(ball) {
 	return ball.offset().left - CANVAS_LEFT;
@@ -63,31 +100,76 @@ function getCanvasY(ball) {
 	return ball.offset().top - CANVAS_TOP;
 }
 
+function incrementVelocity(ball, increment) {
+	var vy = $(ball).data("vy");
+	vy += increment;
+	$(ball).data("vy", vy);
+}
+
+function getVelocity(ball) {
+	return $(ball).data("vy");
+}
+
+function setVelocity(ball, nw, ne, se, sw) {
+	var vx = ball.data("vx");
+	var vy = ball.data("vy");
+	//TODO: make shadow detection more accurate?
+	var isSide = false;;
+	if (se && sw) {	
+		isSide=true;
+		if (vy > 0) vy*=-1;
+		//else vy-=dx;
+	}
+	else if (ne && nw) {	
+		if (vy < 0) vy*=-1;
+		//else vy+=dx;
+	}
+	else if (ne && se) {	
+		isSide=true;
+		if (vx > 0) vx*=-1;
+		//else vx+=dx;
+	}
+	else if (nw && sw) {	
+		isSide=true;
+		if (vx < 0) vx*=-1;
+		//else vx-=dx;
+	}
+	if (!isSide) {
+		if (se || sw) {	
+			if (vy > 0) vy*=-1;
+			//else vy-=dx;
+		}
+		if (ne || nw) {	
+			if (vy < 0) vy*=-1;
+			//else vy+=dx;
+		}
+		if (ne || se) {	
+			if (vx > 0) vx*=-1;
+			else vx-=dx;
+		}
+		if (nw || sw) {	
+			if (vx < 0) vx*=-1;
+			else vx+=dx;
+		}
+	}	
+	ball.data("vx", vx);
+	ball.data("vy", vy);
+}
 
 //Returns true if the ball hit a shadow, false otherwise.
-//Updates the ball's data "angle" attribute.
 function isHit(ball) {
 	var x = getCanvasX(ball);
 	var y = getCanvasY(ball);
-	//TODO: make shadow detection more accurate?
-	if (isShadow(x, y) 
-			|| isShadow(x + BALL_WIDTH, y)
-			|| isShadow(x + BALL_WIDTH, y + BALL_HEIGHT)
-			|| isShadow(x, y + BALL_HEIGHT)
-			) {
-		//TODO: ANGLE DATA
-		return true;
-	}
-	return false;
-}
-
-//Plays a sound based on the ball's attributes
-function playSound(ball) {
-	//TODO
+	var nw = isShadow(x, y);
+	var ne = isShadow(x + BALL_WIDTH, y);
+	var se = isShadow(x + BALL_WIDTH, y + BALL_HEIGHT);
+	var sw = isShadow(x, y + BALL_HEIGHT);
+	setVelocity(ball, nw, ne, se, sw);
+	return (nw || ne || se || sw) && !(nw && ne && se && sw);
 }
 
 function isShadow(x, y) {
-	var index = 4 * (x + y * CANVAS_RIGHT);
+	var index = 4 * (x + (y * CANVAS_WIDTH));
 	if (shadow.data[index] == OVERLAY && shadow.data[index+1] == OVERLAY && shadow.data[index+2] == OVERLAY) {
 		return false;
 	}
