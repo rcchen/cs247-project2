@@ -1,5 +1,6 @@
 var vy = 10; //Velocity in the y direction
 var vx = 0; //Velocity in the x direction
+var dx = 3; //Amount that velocity changes when hitting ball in same direction
 var BALL_HEIGHT=15;
 var BALL_WIDTH=15;
 
@@ -68,35 +69,71 @@ function getCanvasY(ball) {
 	return ball.offset().top - CANVAS_TOP;
 }
 
+function incrementVelocity(ball, increment) {
+	var vy = $(ball).data("vy");
+	vy += increment;
+	$(ball).data("vy", vy);
+}
+
+function setVelocity(ball, nw, ne, se, sw) {
+	var vx = ball.data("vx");
+	var vy = ball.data("vy");
+	//TODO: make shadow detection more accurate?
+	var isSide = false;;
+	if (se && sw) {	
+		if (vy > 0) vy*=-1;
+		isSide=true;
+		//else vy-=dx;
+	}
+	else if (ne && nw) {	
+		if (vy < 0) vy*=-1;
+		isSide=true;
+		//else vy+=dx;
+	}
+	else if (ne && se) {	
+		if (vx < 0) vx*=-1;
+		isSide=true;
+		//else vx+=dx;
+	}
+	else if (nw && sw) {	
+		if (vx > 0) vx*=-1;
+		isSide=true;
+		//else vx-=dx;
+	}
+	if (!isSide) {
+		if (se || sw) {	
+			if (vy > 0) vy*=-1;
+			//else vy-=dx;
+		}
+		if (ne || nw) {	
+			if (vy < 0) vy*=-1;
+			//else vy+=dx;
+		}
+		if (ne || se) {	
+			if (vx < 0) vx*=-1;
+			//else vx+=dx;
+		}
+		if (nw || sw) {	
+			if (vx > 0) vx*=-1;
+			//else vx-=dx;
+		}
+	}
+		
+	ball.data("vx", vx);
+	ball.data("vy", vy);
+
+}
 
 //Returns true if the ball hit a shadow, false otherwise.
 function isHit(ball) {
 	var x = getCanvasX(ball);
 	var y = getCanvasY(ball);
-	var vx = ball.data("vx");
-	var vy = ball.data("vy");
-	var isHit = false;
-	//TODO: make shadow detection more accurate?
 	var nw = isShadow(x, y);
 	var ne = isShadow(x + BALL_WIDTH, y);
 	var se = isShadow(x + BALL_WIDTH, y + BALL_HEIGHT);
 	var sw = isShadow(x, y + BALL_HEIGHT);
-	if ((ne && nw) || (se && sw)) {
-		isHit = true;
-		vy*=-1;
-	}
-	if ((ne && se) || (nw && sw)) {
-		isHit = true;
-		vx*=-1;
-	}
-	else if (ne || nw || se || sw) {
-		isHit=true;
-		vx*=-1;
-		vy*=-1;
-	}
-	ball.data("vx", vx);
-	ball.data("vy", vy);
-	return isHit;
+	setVelocity(ball, nw, ne, se, sw);
+	return (nw || ne || se || sw);
 }
 
 //Plays a sound based on the ball's attributes
