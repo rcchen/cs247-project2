@@ -19,14 +19,13 @@ var DRAG = 0.5;
 function moveBalls() {
 	$(".ball").each(function() {
 		var l = $(this).offset().left + $(this).data("vx");
+		var t = $(this).offset().top + $(this).data("vy");
 		var vel = getVelocity($(this));
 		if(vel>0) {
 			incrementVelocity($(this),-DRAG);
 		}else {
 			incrementVelocity($(this), DRAG);
 		}
-		incrementVelocity($(this),GRAVITY);
-		var t = $(this).offset().top + $(this).data("vy");
 		if (l < CANVAS_LEFT || l > CANVAS_RIGHT 
 			|| t < CANVAS_TOP || t > CANVAS_BOTTOM) {
 			$(this).remove();
@@ -35,6 +34,9 @@ function moveBalls() {
 			$(this).offset({top:t, left:l });				
 			if (isHit($(this))) {
 				bounceBall($(this));
+			}
+			else {
+				incrementVelocity($(this),GRAVITY);
 			}
 		}
 	});
@@ -61,16 +63,33 @@ function createBall() {
 
 function bounceBall(ball) {
 	var velocity = ball.data("vy");
+	//Change sound
 	var sound;
-
-	if (ball.getCanvasX < 50) {
-		sound=document.getElementById('note1');
-	} else {
-		sound=document.getElementById('note2');
-	}
+	var offset = ball.offset().left;
+	var index = Math.floor(offset / (CANVAS_WIDTH/6)) + 1; 
+	var filename = 'note' + index;
+	sound=document.getElementById(filename);
 	sound.play();
+	//Change color
+	var color;
+	switch(index) {
+		case 1: color = "red";
+						break;
+		case 2: color = "orange";
+						break;
+		case 3: color = "yellow";
+						break;
+		case 4: color = "green";
+						break;
+		case 5: color = "cyan";
+						break;
+		case 6: color = "blue";
+						break;
+		case 7: color = "purple";
+						break;
+	}
+	$(ball).css('background-color', color);
 }
-
 
 function getCanvasX(ball) {
 	return ball.offset().left - CANVAS_LEFT;
@@ -97,23 +116,22 @@ function setVelocity(ball, nw, ne, se, sw) {
 	//TODO: make shadow detection more accurate?
 	var isSide = false;;
 	if (se && sw) {	
-		if (vy > 0) vy*=-1;
 		isSide=true;
+		if (vy > 0) vy*=-1;
 		//else vy-=dx;
 	}
 	else if (ne && nw) {	
 		if (vy < 0) vy*=-1;
-		isSide=true;
 		//else vy+=dx;
 	}
 	else if (ne && se) {	
-		if (vx < 0) vx*=-1;
 		isSide=true;
+		if (vx > 0) vx*=-1;
 		//else vx+=dx;
 	}
 	else if (nw && sw) {	
-		if (vx > 0) vx*=-1;
 		isSide=true;
+		if (vx < 0) vx*=-1;
 		//else vx-=dx;
 	}
 	if (!isSide) {
@@ -126,18 +144,16 @@ function setVelocity(ball, nw, ne, se, sw) {
 			//else vy+=dx;
 		}
 		if (ne || se) {	
-			if (vx < 0) vx*=-1;
-			//else vx+=dx;
+			if (vx > 0) vx*=-1;
+			else vx-=dx;
 		}
 		if (nw || sw) {	
-			if (vx > 0) vx*=-1;
-			//else vx-=dx;
+			if (vx < 0) vx*=-1;
+			else vx+=dx;
 		}
-	}
-		
+	}	
 	ball.data("vx", vx);
 	ball.data("vy", vy);
-
 }
 
 //Returns true if the ball hit a shadow, false otherwise.
@@ -149,12 +165,7 @@ function isHit(ball) {
 	var se = isShadow(x + BALL_WIDTH, y + BALL_HEIGHT);
 	var sw = isShadow(x, y + BALL_HEIGHT);
 	setVelocity(ball, nw, ne, se, sw);
-	return (nw || ne || se || sw);
-}
-
-//Plays a sound based on the ball's attributes
-function playSound(ball) {
-	//TODO
+	return (nw || ne || se || sw) && !(nw && ne && se && sw);
 }
 
 function isShadow(x, y) {
