@@ -10,13 +10,20 @@ var CANVAS_BOTTOM;
 var CANVAS_RIGHT;
 var CANVAS_LEFT;
 var OVERLAY = 255;
-var GRAVITY = 1;
+var GRAVITY = 2;
+var DRAG = 0.5;
 
 //Moves all balls on the screen
 function moveBalls() {
 	$(".ball").each(function() {
 		var l = $(this).offset().left + $(this).data("vx");
-		incrementVelocity(ball,GRAVITY);
+		var vel = getVelocity($(this));
+		if(vel>0) {
+			incrementVelocity($(this),-DRAG);
+		}else {
+			incrementVelocity($(this), DRAG);
+		}
+		incrementVelocity($(this),GRAVITY);
 		var t = $(this).offset().top + $(this).data("vy");
 		if(isShadow($(this).offset().left,$(this).offset().top)){
 			console.log('shadow collision');
@@ -73,6 +80,10 @@ function incrementVelocity(ball, increment) {
 	var vy = $(ball).data("vy");
 	vy += increment;
 	$(ball).data("vy", vy);
+}
+
+function getVelocity(ball) {
+	return $(ball).data("vy");
 }
 
 function setVelocity(ball, nw, ne, se, sw) {
