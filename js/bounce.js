@@ -9,11 +9,13 @@ var CANVAS_BOTTOM;
 var CANVAS_RIGHT;
 var CANVAS_LEFT;
 var OVERLAY = 255;
+var GRAVITY = 1;
 
 //Moves all balls on the screen
 function moveBalls() {
 	$(".ball").each(function() {
 		var l = $(this).offset().left + $(this).data("vx");
+		incrementVelocity(ball,GRAVITY);
 		var t = $(this).offset().top + $(this).data("vy");
 		if(isShadow($(this).offset().left,$(this).offset().top)){
 			console.log('shadow collision');
