@@ -5,6 +5,8 @@ var BALL_HEIGHT=15;
 var BALL_WIDTH=15;
 
 //These are actually set in shadowboxing.js when the canvas is initialized
+var CANVAS_HEIGHT;
+var CANVAS_WIDTH;
 var CANVAS_TOP;
 var CANVAS_BOTTOM;
 var CANVAS_RIGHT;
@@ -16,11 +18,6 @@ function moveBalls() {
 	$(".ball").each(function() {
 		var l = $(this).offset().left + $(this).data("vx");
 		var t = $(this).offset().top + $(this).data("vy");
-		if(isShadow($(this).offset().left,$(this).offset().top)){
-			console.log('shadow collision');
-		}else {
-			console.log('false');
-		}
 		if (l < CANVAS_LEFT || l > CANVAS_RIGHT 
 			|| t < CANVAS_TOP || t > CANVAS_BOTTOM) {
 			$(this).remove();
@@ -140,7 +137,7 @@ function playSound(ball) {
 }
 
 function isShadow(x, y) {
-	var index = 4 * (x + y * CANVAS_RIGHT);
+	var index = 4 * (x + (y * CANVAS_WIDTH));
 	if (shadow.data[index] == OVERLAY && shadow.data[index+1] == OVERLAY && shadow.data[index+2] == OVERLAY) {
 		return false;
 	}
