@@ -41,8 +41,20 @@
 			<h3>Sketching</h3>
 			<p>Before touching a single line of code, our group got together and brainstormed a bunch of ideas. At the core, our goal was to design and build an activity that was interesting and entertaining. When we delve into the essence of our mission, the need we are targeting is really people's seemingly inherent thirst to be entertained and violent aversion to undesired inactivity (i.e. boredom). Here are some of the ideas that we had during our brainstorming portion of the assignment. We have also included some of our insights as well as how they (do not quite) address user needs and behavior.</p>
 			<div id="p2-sketches">
+				<div class="p2-sketch" id="catty">
+					<a href="images/catty.png" rel="lightbox"><img src="images/catty.png" /></a>
+				</div>
 				<div class="p2-sketch" id="aerobically">
 					<a href="images/aerobically.png" rel="lightbox"><img src="images/aerobically.png" /></a>
+				</div>
+				<div class="p2-sketch" id="itsamemy">
+					<a href="images/itsamemy.png" rel="lightbox"><img src="images/itsamemy.png" /></a>
+				</div>
+				<div class="p2-sketch" id="catchy">
+					<a href="images/catchy.png" rel="lightbox"><img src="images/catchy.png" /></a>
+				</div>
+				<div class="p2-sketch" id="movy">
+					<a href="images/movy.png" rel="lightbox"><img src="images/movy.png" /></a>
 				</div>
 				<div class="p2-sketch" id="birdy">
 					<a href="images/birdy.png" rel="lightbox"><img src="images/birdy.png" /></a>
@@ -50,41 +62,105 @@
 				<div class="p2-sketch" id="bubbly">
 					<a href="images/bubbly.png" rel="lightbox"><img src="images/bubbly.png" /></a>
 				</div>
-				<div class="p2-sketch" id="catchy">
-					<a href="images/catchy.png" rel="lightbox"><img src="images/catchy.png" /></a>
-				</div>
-				<div class="p2-sketch" id="catty">
-					<a href="images/catty.png" rel="lightbox"><img src="images/catty.png" /></a>
-				</div>
-				<div class="p2-sketch" id="fishy">
-					<a href="images/fishy.png" rel="lightbox"><img src="images/fishy.png" /></a>
-				</div>
-				<div class="p2-sketch" id="itsamemy">
-					<a href="images/itsamemy.png" rel="lightbox"><img src="images/itsamemy.png" /></a>
-				</div>
-				<div class="p2-sketch" id="movy">
-					<a href="images/movy.png" rel="lightbox"><img src="images/movy.png" /></a>
-				</div>
-				<div class="p2-sketch" id="musically">
-					<a href="images/musically.png" rel="lightbox"><img src="images/musically.png" /></a>
-				</div>
 				<div class="p2-sketch" id="rainy">
 					<a href="images/rainy.png" rel="lightbox"><img src="images/rainy.png" /></a>
 				</div>
 				<div class="p2-sketch" id="shooty">
 					<a href="images/shooty.png" rel="lightbox"><img src="images/shooty.png" /></a>
 				</div>
+				<div class="p2-sketch" id="fishy">
+					<a href="images/fishy.png" rel="lightbox"><img src="images/fishy.png" /></a>
+				</div>
 			</div>
+		<div id="more-brainstorming" style="display:block"> <h3>Other ideas</h3>
+			<ul id="brainstorming-list">
+				<li>DDR for shadows - you have to hit targets that show up above, below, and to the side of you in time to music.</li>
+				<li>Shadowplaying of drums: something like setting up a virtual drum set at different points on the wall and have the shadow play the different parts of the set based on where the hands are and potentially how fast they move to that point(which would control how loud) </li>
+				<li>Super Mario - jump to avoid obstacles on the ground, and to grab stuff from the sky.</li>
+				<li>Volleyball - including a net; point to each player if the ball touches down on their opponent's side </li>
+				<li> Interactive tetris - tetris blocks fall from above, and you can knock them into place with your shadow.</li>
+				<li>Egg-drop game with shadows: Virtual eggs keep falling at different points and your shadow has to move to intercept them with your head. The eggs keep falling faster as you level up. You get points based on how long you can stay alive</li>
+				<li>Snake: play a game of snake by bouncing it off of your shadow</li>
+ 				<li>Crowd - for a while, your shadow is the only thing that appears; then duplicates of your past shadow (from a few seconds before) show up at random intervals and possibly interact (make each other disappear when they collide, etc.)</li>
+				<li>`Shadow animals - try to match silhouettes of animals on the screen by making hand shadow animals.</li>
+				<li>dirty blob exists in the world, user needs to scoop water at the blob until it is washed away</li>
+				<li>Bubbles - bubbles float all around, you pop them with your shadow.</li>
+				<li>Shadow art - a strip at the top of the screen has a bunch of colors: you can "select" one with your shadow and then leave trails of that color behind you as you move </li>
+			</ul>
+		</div>	
+		<h3>Final decision</h3>
+		<div class="p2-sketch" id="musically">
+			<a href="images/musically.png" rel="lightbox"><img src="images/musically.png" /></a>
 		</div>
 
+		</div>
+
+<div>
+As we considered our context, audience, and goals carefully, we realized we were looking for several criteria. We wanted an experience that didn't require a whole lot of moving around (as people stand in place in line), could be used by one or more people at the same time, but did not require more than one person, was interactive and engaging, and had no clear beginning or end (more like a piece of art). Additionally, we took into account the secondary factors of technical limitations and our own time constraints. We finally chose the idea of having balls fall from the sky, and play different notes when they bounce off of a person's shadow based on where they are on the screen. The balls change color every time they play a different note from the one they last played. This fulfilled our requirements for a good in-line experience. It can be used by one or mre people, and does not require people to move much at all. Additionally, it is engaging on two different levels: initially, it is novel and interesting solely because of the changing colors and the interactivity of balls bouncing off of one's shadow. However, if someone spends a long time interacting with it, they might start to notice that the tone played by each ball is linked to its location when it strikes the shadow, and manipulate their shadow to produce certain tones.
+</div>
+
+
 	</div>
+
 
 	<script>
 		$('#aerobically').popover({
 			title: 'Jumping Jacks',
-			content: 'Exercise is great since people like exercising and it\'s healthy. However, we didn\'t think that the people in front and behind of the person interacting with the screen would appreciate it very much. Also we wanted more than one person to be able to participate',
+			content: 'We originally liked the idea of allowing people to exercise while waiting, since many people like to do small things throughout the day (such as climbing the stairs instead of using the escalator, or choosing a far away parking spot) in order to get small amounts of exercise. Since people view exercise as productive, we thought it would be a good way for them to pass the time while waiting. However, we realized that this idea was not quite right for the context of waiting in line, as the other people waiting in line might not appreciate someone doing jumping jacks in close proximity.',
+			trigger: 'hover'
+		});
+		$('#catty').popover({
+			title: 'Reddit Cat',
+			content: 'A shadow animal would understandably provide a fun experience to be enjoyed during the short term, particularly by injecting a warm, fuzzy emotional experience into the drudgery of a line. We initially believed that a social network might cater to college students by motivating interaction with other people in line to collectively make the animal (i.e. a cat) purr with pleasure. We realized that lines are generally composed of a non negligible number of people from a demographic with less interest in social networks (i.e. not the typical young, male programmers who frequent reddit), we thought that the connection to reddit might put some users off. In additional, identifying the a shadow hand from the rest of a person\'s shadow would be technically challenging.',
+			trigger: 'hover'
+		});
+		$('#itsamemy').popover({
+			title: 'Mystery Box',
+			content: 'We liked this idea for people in a line located in a more commercial setting. The user could jump up and down, hitting the box with their head, and would produce some graphic, but at random intervals would produce a cool prize, such as coupons or store products. This financial incentive is attractive in that it offers users a sense of productively using inactive time. However, we thought that the interface (which is reminiscent of the boxes in Super Mario Bros) might be a bit unclear. In addition, there are only so many ways to hit a box with one\'s shadow head and there might be a reduction in 1) collaborative interaction with the interface and 2) a limited ability to interact creatively or artistically with the concept.',
+			trigger: 'hover'
+		});
+		$('#catchy').popover({
+			title: 'Catch',
+			content: 'Although we liked the idea of encouraging people to interact with each other while waiting in line. However, we decided that we would have more success with this by allowing the experience to be used with either one or two people, as complete strangers were unlikely to try out something they had never seen before together. If one person was already using it, however, there was more of a chance of other people joining in.',
+			trigger: 'hover'
+		});
+		$('#movy').popover({
+			title: 'Directional Game',
+			content: 'We had several ideas that used direction. For example, we thought it would be interesting to have the background change appearance as the user moves to make it appear as if the user was flying. The problem with this and several other ideas was that only one user can participate at a time. We thought it would be better to allow other people waiting in line to participate as well, so that more people are engaged at once instead of being bored and impatient.',
+			trigger: 'hover'
+		});
+		$('#movy').popover({
+			title: 'Directional Game',
+			content: 'We had several ideas that used direction. For example, we thought it would be interesting to have the background change appearance as the user moves to make it appear as if the user was flying. The problem with this and several other ideas was that only one user can participate at a time. We thought it would be better to allow other people waiting in line to participate as well, so that more people are engaged at once instead of being bored and impatient.',
+			trigger: 'hover'
+		});
+		$('#birdy').popover({
+			title: 'Birdies',
+			content: 'We liked this idea, but thought that users would be more engaged if things happened when they moved, rather than just when they stood still.',
+			trigger: 'hover'
+		});
+		$('#bubbly').popover({
+			title: 'Giant Bubble',
+			content: 'The idea of a giant bubble led to thinking about games you could play with it: for example, a user uses their shadow to bounce it around the screen as it starts moving faster and faster -- they lose if it hits the ground. However, since the line might move forward before the end of any game, we decided not to pursue a game or other idea with a clear \"end\", so as not to force users to forfeit or  encourage them to hold up the line in order to finish their game.',
+			trigger: 'hover'
+		});
+		$('#shooty').popover({
+			title: 'Shooting game',
+			content: 'The idea here was to allow people to shoot lasers at each other from their fingertips. However, in addition to some of the other factors mentioned with earlier ideas, it would also be extremely difficult to implement without using a kinect, since one would have to separate fingers (or at the very least, hands) from the people\'s shadows',
+			trigger: 'hover'
+		});
+		$('#rainy').popover({
+			title: 'Rain',
+			content: 'We liked Scott Snibe\'s water piece, and thought about creating an experience where users can also collect the water by making cups with their shadow. However, taking our time constraints into account, we decided that we would not be able to create a realistic enough experience for the user for this to be worth it.',
+			trigger: 'hover'
+		});
+		$('#fishy').popover({
+			title: 'Fish chomping',
+			content: 'We thought that a fishchomping game (in which the user\'s arms serve as a shark\'s mouth) might be fun, and meets most of the criteria we were looking for for our user experience.',
 			trigger: 'hover'
 		});
 	</script>
+
+
 
 </body>

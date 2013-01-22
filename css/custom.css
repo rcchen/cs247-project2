@@ -14,3 +14,7 @@
 body {
 	background-color:black;
 }
+
+audio {
+	display:none;
+}

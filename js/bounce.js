@@ -58,7 +58,7 @@ function createBall() {
 	newBall.css("width", BALL_WIDTH+"px");
 	var xCoord = Math.floor(Math.random()*(CANVAS_RIGHT+1)); //random number from 0 to CANVAS_RIGHT
 	newBall.css("left", xCoord);
-	newBall.css("top", CANVAS_TOP);
+	newBall.css("top", CANVAS_TOP + 1);
 	var index = Math.floor(xCoord / (CANVAS_WIDTH/(NUM_COLORS-1))) + 1; 
 	var color = getColor(index);
 	$(newBall).css('background-color', color);
@@ -133,7 +133,7 @@ function setVelocity(ball, nw, ne, se, sw) {
 	var vx = ball.data("vx");
 	var vy = ball.data("vy");
 	//TODO: make shadow detection more accurate?
-	var isSide = false;;
+	var isSide = false;
 	if (se && sw) {	
 		isSide=true;
 		if (vy > 0) vy*=-1;
@@ -189,9 +189,8 @@ function isHit(ball) {
 
 function isShadow(x, y) {
 	var index = 4 * (x + (y * CANVAS_WIDTH));
-	if (shadow.data[index] == OVERLAY && shadow.data[index+1] == OVERLAY && shadow.data[index+2] == OVERLAY) {
+		if (shadow.data[index]==0) return false;
+		console.log("shadow");
 		return true;
-	}
-	return false;	
 }
 
