@@ -34,7 +34,8 @@
 			<h3>Needfinding: Users and the Context of Use</h3>
 			<p>In the process of discovering our unique public experience, we observed that the experience of waiting in line offered an opportunity for transforming static, passive time, into something collaborative, creative, and much more interesting.</p>
 			<p>Waiting in line is very rarely enjoyable and even less so because of the perception that one is wasting otherwise valuable time while standing in a line. Consider that standing is not conducive to working on a computer, for instance, or even reading a book long enough to make it through more than a few chapters. Moreover, a sense of unfamiliarity often accompanies this feeling of helpless unproductivity due to an immersion among strangers that one tends to be standing next to while waiting in a line.</p>
-			<p>Our observations and conversations coupled with personal experiences provided an insight into an unmet need. A representative comment about standing in lines we noted was, "I HATE STANDING IN LINES. I WISH THERE WAS SOMETHING TO DO. ANYTHING IS BETTER THAN NOTHING". Wouldn't it be much better to engage in something creative, simply fun, and collaborative rather than passively wait whilst surrounded by strangers who you're not sure are interested in talking to you?</p>
+			<p><a href="http://www.nytimes.com/2012/08/19/opinion/sunday/why-waiting-in-line-is-torture.html?pagewanted=all&_r=0">Research</a> confirmed by MIT operations researcher Richard Larson suggests that much of the dissatisfaction with waiting in lines has to do with how occupied time feels shorter than unoccupied time even if the occupied time is spent doing something as simple as looking at oneself in a mirror. In other words, if we provide something with which to occupy persons waiting in a line, their experience will be more positive, ultimately leading to happier people and fresher environments.</p>
+			<p>Our observations and conversations coupled with personal experiences provided an insight into an unmet need. A representative comment about standing in lines we noted was, “In lines, I always get upset thinking about all the other things I could be doing”. Wouldn’t it be much better to engage in something creative, simply fun, and collaborative rather than passively wait whilst surrounded by strangers who you’re not sure are interested in talking to you?</p>
 		</div>
 
 		<div id="p2-sketching">
@@ -78,12 +79,12 @@
 				<li>Shadowplaying of drums: something like setting up a virtual drum set at different points on the wall and have the shadow play the different parts of the set based on where the hands are and potentially how fast they move to that point(which would control how loud) </li>
 				<li>Super Mario - jump to avoid obstacles on the ground, and to grab stuff from the sky.</li>
 				<li>Volleyball - including a net; point to each player if the ball touches down on their opponent's side </li>
-				<li> Interactive tetris - tetris blocks fall from above, and you can knock them into place with your shadow.</li>
+				<li>Interactive tetris - tetris blocks fall from above, and you can knock them into place with your shadow.</li>
 				<li>Egg-drop game with shadows: Virtual eggs keep falling at different points and your shadow has to move to intercept them with your head. The eggs keep falling faster as you level up. You get points based on how long you can stay alive</li>
 				<li>Snake: play a game of snake by bouncing it off of your shadow</li>
  				<li>Crowd - for a while, your shadow is the only thing that appears; then duplicates of your past shadow (from a few seconds before) show up at random intervals and possibly interact (make each other disappear when they collide, etc.)</li>
-				<li>`Shadow animals - try to match silhouettes of animals on the screen by making hand shadow animals.</li>
-				<li>dirty blob exists in the world, user needs to scoop water at the blob until it is washed away</li>
+				<li>Shadow animals - try to match silhouettes of animals on the screen by making hand shadow animals.</li>
+				<li>Dirty blob exists in the world, user needs to scoop water at the blob until it is washed away</li>
 				<li>Bubbles - bubbles float all around, you pop them with your shadow.</li>
 				<li>Shadow art - a strip at the top of the screen has a bunch of colors: you can "select" one with your shadow and then leave trails of that color behind you as you move </li>
 			</ul>
@@ -96,7 +97,31 @@
 		</div>
 
 <div>
-As we considered our context, audience, and goals carefully, we realized we were looking for several criteria. We wanted an experience that didn't require a whole lot of moving around (as people stand in place in line), could be used by one or more people at the same time, but did not require more than one person, was interactive and engaging, and had no clear beginning or end (more like a piece of art). Additionally, we took into account the secondary factors of technical limitations and our own time constraints. We finally chose the idea of having balls fall from the sky, and play different notes when they bounce off of a person's shadow based on where they are on the screen. The balls change color every time they play a different note from the one they last played. This fulfilled our requirements for a good in-line experience. It can be used by one or mre people, and does not require people to move much at all. Additionally, it is engaging on two different levels: initially, it is novel and interesting solely because of the changing colors and the interactivity of balls bouncing off of one's shadow. However, if someone spends a long time interacting with it, they might start to notice that the tone played by each ball is linked to its location when it strikes the shadow, and manipulate their shadow to produce certain tones.
+<b>Rationale:</b>
+<p>As we considered our context, audience, and goals carefully, we realized we were looking for several criteria. We wanted an experience that didn't require a whole lot of moving around (as people stand in place in line), could be used by one or more people at the same time, but did not require more than one person, was interactive and engaging, and had no clear beginning or end (more like a piece of art). Additionally, we took into account the secondary factors of technical limitations and our own time constraints. We finally chose the idea of having balls fall from the sky, and play different notes when they bounce off of a person's shadow based on where they are on the screen. The balls change color every time they play a different note from the one they last played. This fulfilled our requirements for a good in-line experience. It can be used by one or mre people, and does not require people to move much at all. Additionally, it is engaging on two different levels: initially, it is novel and interesting solely because of the changing colors and the interactivity of balls bouncing off of one's shadow. However, if someone spends a long time interacting with it, they might start to notice that the tone played by each ball is linked to its location when it strikes the shadow, and manipulate their shadow to produce certain tones.</p>
+<p>We settled on the idea of allowing shadows to allow make music for individuals waiting in line. Using a concept similar to <a href="http://www.youtube.com/watch?v=Tix6jPTTrFI">sound drop</a></p>
+<p>The application would allow the user to interact with balls coming down using their shadow as a means to make fun sounds.</p>
+
+<p><b>The application we created had the following key characteristics:</b></p>
+<ul>
+	<li>The balls would bounce off the shadow based on the angle at which they hit the shadow</li>
+	<li>Each ball would make a sound determined by the position on the screen at which they hit the shadow</li>
+	<li>The balls would behave realistically so as to account for gravity and drag whilst moving through the screen</li>
+</ul>
+
+<p><b>Key Design Considerations and implementation:</b><p>
+
+<p>We wanted the app to be as intuitive as possible and not require unexpected extraneous interactions which would distract from the key purpose of the app. As a result we tried to make the interaction of the user's shadow with the ball as natural as possible. To enable this to happen we made the following design decisions:</p>
+
+<ul>
+	<li>Include many pixels as contact indicators on the ball, to cause impact to be as latent free as possible even though the responsiveness to the shadow is slightly delayed. The key purpose of this was to ensure that the ball would respond to the shadow as a surface even though the user made sudden unexpected collisions with the ball</li>
+	<li>Users expect balls to have gravity, and return back after a bounce in addition to expecting the ball to bounce in the correct direction based on impact with the shadow. To make sure this happened we included a few parameters that would constantly check for the nature of collision as well as keep adjusting the gravity, drag and other parameters to make the balls move as users expect them to. The purpose of this was to allow users to predict where the ball would move and include a fun, realistic model in the app.</li>
+	<li>Edit sound files to be of a similar scale-range to not include disharmonious sounds and effects when the balls hit different parts of the shadow. To be able to do this, we edited sound files and made sure the range was not too extreme and calibrated the different parts of a shadow based on location on the screen to be able to make fun sounds that would not be annoying to hear.</li>
+	<li>Finally, aesthetic value is key in such an app and so along with smooth sounds, realistic physical engine and good response to shadow we added colors to balls that would change based on note to increase the visual appeal of the app and give the user the sense of the dominant note at a point in time.</li>
+</ul>
+
+<br />
+
 </div>
 
 
