@@ -40,7 +40,7 @@ var started = false;
 $(document).ready(function() {
     initializeDOMElements();
 
-    $("#background").attr('disabled', true);
+   // $("#background").attr('disabled', true);
 	if (INPUT == "kinectdepth" || INPUT == "kinectrgb") {
 		setUpKinect();
 	} else if (INPUT == "webcam") {
@@ -237,9 +237,10 @@ function getShadowData() {
         var distance = pixelDistance(rCurrent, gCurrent, bCurrent, rBackground, gBackground, bBackground);         
         if (distance >= SHADOW_THRESHOLD) {
             // foreground, show shadow
-            pixelData.data[i] = 0;
-            pixelData.data[i+1] = 0;
-            pixelData.data[i+2] = 0;
+            pixelData.data[i] = 255;
+            pixelData.data[i+1] = 255;
+            pixelData.data[i+2] = 255;
+            pixelData.data[i+3] = 255;
         } else {
             // background
 						 
@@ -247,10 +248,9 @@ function getShadowData() {
             updateBackground(i, rCurrent, gCurrent, bCurrent, rBackground, gBackground, bBackground);
             
             // now set the background color
-            pixelData.data[i] = 255;
-            pixelData.data[i+1] = 255;
-            pixelData.data[i+2] = 255;
-            pixelData.data[i+3] = 0;
+            pixelData.data[i] = 0;
+            pixelData.data[i+1] = 0;
+            pixelData.data[i+2] = 0;
         }        
     }
     

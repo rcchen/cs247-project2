@@ -14,6 +14,7 @@ var CANVAS_LEFT;
 var OVERLAY = 255;
 var GRAVITY = 2;
 var DRAG = 0.5;
+var NUM_COLORS = 12;
 
 //Moves all balls on the screen
 function moveBalls() {
@@ -48,6 +49,7 @@ function createBall() {
 	newBall.attr("class", "ball");
 	newBall.data("vy", vy);
 	vx = Math.floor(Math.random()*(10))+1; //random number from 0 to 2
+	//vx = 0;
 	if (Math.random() > 0.5) {
 		vx *=-1;
 	}
@@ -57,6 +59,9 @@ function createBall() {
 	var xCoord = Math.floor(Math.random()*(CANVAS_RIGHT+1)); //random number from 0 to CANVAS_RIGHT
 	newBall.css("left", xCoord);
 	newBall.css("top", CANVAS_TOP);
+	var index = Math.floor(xCoord / (CANVAS_WIDTH/(NUM_COLORS-1))) + 1; 
+	var color = getColor(index);
+	$(newBall).css('background-color', color);
 	$('body').append(newBall);
 }
 
@@ -66,29 +71,43 @@ function bounceBall(ball) {
 	//Change sound
 	var sound;
 	var offset = ball.offset().left;
-	var index = Math.floor(offset / (CANVAS_WIDTH/6)) + 1; 
+	var index = Math.floor(offset / (CANVAS_WIDTH/(NUM_COLORS-1))) + 1; 
 	var filename = 'note' + index;
 	sound=document.getElementById(filename);
+	console.log(filename);
 	sound.play();
 	//Change color
-	var color;
-	switch(index) {
-		case 1: color = "red";
-						break;
-		case 2: color = "orange";
-						break;
-		case 3: color = "yellow";
-						break;
-		case 4: color = "green";
-						break;
-		case 5: color = "cyan";
-						break;
-		case 6: color = "blue";
-						break;
-		case 7: color = "purple";
-						break;
-	}
+	var color = getColor(index);
 	$(ball).css('background-color', color);
+}
+
+function getColor(index) {
+	switch(index) {
+		case 1: color = "#FF0000";
+						return color;
+		case 2: color = "#FF0095";
+						return color;
+		case 3: color = "#D400FF";
+						return color;
+		case 4: color = "#8C00FF";
+						return color;
+		case 5: color = "#2600FF";
+						return color;
+		case 6: color = "#0099FF";
+						return color;
+		case 7: color = "#00C8FF";
+						return color;
+		case 8: color = "#00FFD5";
+						return color;
+		case 9: color = "#00FF6A";
+						return color;
+		case 10: color = "#B7FF00";
+						return color;
+		case 11: color = "#FFBB00";
+						return color;
+		case 12: color = "#FF7700";
+						return color;
+	}
 }
 
 function getCanvasX(ball) {
@@ -171,8 +190,8 @@ function isHit(ball) {
 function isShadow(x, y) {
 	var index = 4 * (x + (y * CANVAS_WIDTH));
 	if (shadow.data[index] == OVERLAY && shadow.data[index+1] == OVERLAY && shadow.data[index+2] == OVERLAY) {
-		return false;
+		return true;
 	}
-	return true;	
+	return false;	
 }
 
