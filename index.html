@@ -2,10 +2,12 @@
 <html>
 
 <head>
-	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link href="css/cerulean.min.css" rel="stylesheet" media="screen">
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+	<link href="css/cerulean.min.css" rel="stylesheet" media="screen" />
+	<link href="css/lightbox.css" rel="stylesheet" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script src="js/jquery.masonry.min.js"></script>
+	<script src="js/lightbox.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<style>
 		.container {
 			margin-top: 30px;
@@ -39,28 +41,50 @@
 			<h3>Sketching</h3>
 			<p>Before touching a single line of code, our group got together and brainstormed a bunch of ideas. At the core, our goal was to design and build an activity that was interesting and entertaining. When we delve into the essence of our mission, the need we are targeting is really people's seemingly inherent thirst to be entertained and violent aversion to undesired inactivity (i.e. boredom). Here are some of the ideas that we had during our brainstorming portion of the assignment. We have also included some of our insights as well as how they (do not quite) address user needs and behavior.</p>
 			<div id="p2-sketches">
-				<div class="p2-sketch"><img src="images/aerobically.png" /></div>
-				<div class="p2-sketch"><img src="images/birdy.png" /></div>
-				<div class="p2-sketch"><img src="images/bubbly.png" /></div>
-				<div class="p2-sketch"><img src="images/catchy.png" /></div>
-				<div class="p2-sketch"><img src="images/catty.png" /></div>
-				<div class="p2-sketch"><img src="images/fishy.png" /></div>
-				<div class="p2-sketch"><img src="images/itsamemy.png" /></div>
-				<div class="p2-sketch"><img src="images/movy.png" /></div>
-				<div class="p2-sketch"><img src="images/musically.png" /></div>
-				<div class="p2-sketch"><img src="images/rainy.png" /></div>
-				<div class="p2-sketch"><img src="images/shooty.png" /></div>
+				<div class="p2-sketch" id="aerobically">
+					<a href="images/aerobically.png" rel="lightbox"><img src="images/aerobically.png" /></a>
+				</div>
+				<div class="p2-sketch" id="birdy">
+					<a href="images/birdy.png" rel="lightbox"><img src="images/birdy.png" /></a>
+				</div>
+				<div class="p2-sketch" id="bubbly">
+					<a href="images/bubbly.png" rel="lightbox"><img src="images/bubbly.png" /></a>
+				</div>
+				<div class="p2-sketch" id="catchy">
+					<a href="images/catchy.png" rel="lightbox"><img src="images/catchy.png" /></a>
+				</div>
+				<div class="p2-sketch" id="catty">
+					<a href="images/catty.png" rel="lightbox"><img src="images/catty.png" /></a>
+				</div>
+				<div class="p2-sketch" id="fishy">
+					<a href="images/fishy.png" rel="lightbox"><img src="images/fishy.png" /></a>
+				</div>
+				<div class="p2-sketch" id="itsamemy">
+					<a href="images/itsamemy.png" rel="lightbox"><img src="images/itsamemy.png" /></a>
+				</div>
+				<div class="p2-sketch" id="movy">
+					<a href="images/movy.png" rel="lightbox"><img src="images/movy.png" /></a>
+				</div>
+				<div class="p2-sketch" id="musically">
+					<a href="images/musically.png" rel="lightbox"><img src="images/musically.png" /></a>
+				</div>
+				<div class="p2-sketch" id="rainy">
+					<a href="images/rainy.png" rel="lightbox"><img src="images/rainy.png" /></a>
+				</div>
+				<div class="p2-sketch" id="shooty">
+					<a href="images/shooty.png" rel="lightbox"><img src="images/shooty.png" /></a>
+				</div>
 			</div>
 		</div>
 
 	</div>
 
 	<script>
-		//$('#p2-sketches').imagesLoaded(function() {
-			$('#p2-sketches').masonry({
-				itemSelector: 'p2-sketch'
-			});
-		//});
+		$('#aerobically').popover({
+			title: 'Jumping Jacks',
+			content: 'Exercise is great since people like exercising and it\'s healthy. However, we didn\'t think that the people in front and behind of the person interacting with the screen would appreciate it very much. Also we wanted more than one person to be able to participate',
+			trigger: 'hover'
+		});
 	</script>
 
 </body>
