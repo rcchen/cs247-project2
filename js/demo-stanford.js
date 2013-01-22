@@ -32,30 +32,8 @@ function renderShadow() {
     shadow = getShadowData();
     moveBalls(shadow);
     // Drawing from our image onto the canvas
-    if (imageReady) {
-        // draw the image over the entire canvas
-        shadowContext.drawImage(stanfordImage, 0, 0, shadowCanvas.width, shadowCanvas.height);    
-        var pixels = shadowContext.getImageData(0, 0, shadowCanvas.width, shadowCanvas.height);
-
-        // Now that the shadowContext has our jpeg painted, we can
-        // loop pixel by pixel and only show the parts where the shadow lies.
-        // 
-        // IMPORTANT: make sure that the width and height of your two
-        // canvases match. Otherwise, here be dragons!
-        for(var i = 0; i < shadow.data.length; i=i+4) {
-            // i = red; i+1 = green; i+2 = blue; i+3 = alpha
-            if(shadow.data[i] == OVERLAY && shadow.data[i+1] == OVERLAY && shadow.data[i+2] == OVERLAY) {
-                // If the current shadow pixel is to be overlayed, copy it over to
-                // our canvas' pixel data
-                pixels.data[i]   = shadow.data[i];
-                pixels.data[i+1] = shadow.data[i+1];
-                pixels.data[i+2] = shadow.data[i+2];
-            }
-        }
-
-        // And now, paint our pixels array back to the canvas.
-        shadowContext.putImageData(pixels, 0, 0);
-    }
+		var pixels = shadow;
+    shadowContext.putImageData(pixels, 0, 0);
 		if (stepCounter==10) {
 			console.log("step counter");
 			createBall();
